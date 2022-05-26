@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        window.addEventListener("load", evt => {
+
+            const output = document.getElementById("output");
+            let ws;
+
+            const locale = new Intl.DateTimeFormat("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                day: "2-digit",
+                month: "2-digit",
+                year: "2-digit",
+            })
+            const timeFormatter = (input) => {
+                let milliseconds = input.getMilliseconds().toFixed(3)
+                return locale.format(input) + `:${milliseconds}`
+            }
+            const print = (title, message) => {
+                const container = document.createElement("div");
+                container.style.margin = "10px"
+                container.style.width = "100%"
+                container.style.display = "flex"
+                container.style.justifyContent = "space-between"
+                const box = (str) => {
+                    const bx = document.createElement("div")
+                    bx.innerText = str
+                    return bx
+                };
+
+                container.append(box(`$  ${title}`));
+                message && container.append(box(message));
+                output.appendChild(container);
+                output.scroll(0, output.scrollHeight);
+            };
+
+            document.getElementById("clear").onclick = () => output.innerHTML = ""
+
+            document.getElementById("open").onclick = () => {
+                if (ws) {
+                    alert("Connection is open!")
+                    return false;
+                }
+                ws = new WebSocket("{{.}}");
+                ws.onopen = evt => {
+                    print("OPEN");
+                }
+                ws.onclose = evt => {
+                    print("CLOSE");
+                    ws = null;
+                }
+                ws.onmessage = evt => {
+                    print("SERVER (Response):", evt.data);
+                }
+                ws.onerror = evt => {
+                    print("ERROR:", evt.data);
+                }
+                return false;
+            };
+
+
+            document.getElementById("send").onclick = evt => {
+                if (!ws) {
+                    alert("Connection is closed!")
+                    return false;
+                }
+
+                const dateTime = timeFormatter(new Date())
+                const message = dateTime
+                print(`Client (Request):`, message);
+                ws.send(dateTime + " - I am a JS client!");
+                return false;
+            };
+
+            document.getElementById("close").onclick = evt => {
+                if (!ws) {
+                    alert("Connection is closed!")
+                    return false;
+                }
+                ws.close();
+                return false;
+            };
+
+        });
+    </script>
+</head>
+<body>
+<div style="width: 100%">
+    <div>
+            <pre>
+                 - Click "Open" to create a connection to the server.
+                 - Click "Send" to send client time to the server. (You will receive the server time in AKG)
+                 - Click "Close" to close the connection.
+            </pre>
+        <div style="margin: 30px">
+            <button id="open">Open socket connection</button>
+            <button id="close">Close socket connection</button>
+            <button id="send">Send</button>
+            <button id="clear">Clear terminal</button>
+        </div>
+    </div>
+    <div style="border: 1px solid black;border-radius: 10px;margin: 10px;position: relative;min-height: 300px;padding: 20px;max-height: 70vh;overflow-y: scroll;scroll-behavior: auto">
+        <div id="output" style="width: 100%;height: 100%"></div>
+        <div style="color: black;opacity: 0.1;font-size: 30px;position:absolute;left: 0;right: 0;top: 0;bottom: 0;display: flex;justify-content: center;align-items: center">
+            Terminal
+        </div>
+    </div>
+</div>
+</body>
+</html>
