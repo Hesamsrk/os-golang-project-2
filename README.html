@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="os-project-1">OS Project 1</h1>
+<p>This folder contains the solutions for project 1, <em><strong>OS course at Amirkabir university of technology</strong></em>.</p>
+<p>The documentation contains some instructions needed to run the applications and also funder explanation about the
+results.</p>
+<p>Note that:</p>
+<ul>
+<li>
+<p>All solutions are implemented using <a href="https://go.dev/">golang</a>. You can use <a href="https://go.dev/dl/">This</a> link to download
+and install this language on your machine to be able to run these codes.</p>
+</li>
+<li>
+<p><a href="./p1">P1</a> is using Windows API system call. So you need to run that on a Windows machine.</p>
+</li>
+<li>
+<p>For your ease, I provided a dockerfile. If you have docker installed, by running these steps you can run all
+applications on your system <strong>without installing golang</strong>:</p>
+<ul>
+<li>
+<p>Using this method, you will not be able to run <a href="./p1">p1</a>.
+(Because we used a Linux golang image, and we couldn't use a Windows golang image because normally docker is only
+able to run linux based images.)</p>
+</li>
+<li>
+<p>In the root directory run these commands:</p>
+<pre class="hljs"><code><div>docker build -t os_project_1 .
+
+docker run -it --rm --name ps_project_1_instance os_project_1      
+</div></code></pre>
+</li>
+<li>
+<p>Now you are interacting with a terminal running on a virtual machine. (You can continue running all other steps in
+here)</p>
+<p><img src="docker_terminal.png" alt="img.png"></p>
+</li>
+<li>
+<p>To connect more terminals to this virtual machine run:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>docker exec -it ps_project_1_instance sh
+</div></code></pre>
+</li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>Group members:</p>
+<blockquote>
+<ul>
+<li><strong>Hesam Sarkhosh</strong> - 9713020</li>
+<li><strong>Shiva Moloodi</strong> - 9713031</li>
+<li><strong>Amirmohammad Saremi</strong> - 9713051</li>
+</ul>
+</blockquote>
+<h2 id="index">Index</h2>
+<p>This project contains the solution to 4 problems:</p>
+<ol>
+<li><a href="#problem-1---run-another-process-using-windows-api-system-call">Run another process using Windows API System call</a></li>
+<li><a href="#problem-2---the-producer-consumer-problem-using-shared-memory">The Producer-consumer problem using shared memory</a></li>
+<li><a href="#problem-3---client-server--datetime-exchange-using-websockets">Client-server  Datetime exchange using websockets </a></li>
+<li><a href="#problem-4---multithreading-matrix-addition">Multithreading matrix addition</a></li>
+</ol>
+<h2 id="problem-1---run-another-process-using-windows-api-system-call">Problem 1 - Run another process using Windows API System call</h2>
+<p>This program runs a new process using Windows API syscall.</p>
+<h3 id="how-to-run-it">How to run it?</h3>
+<p>Follow these steps:</p>
+<pre class="hljs"><code><div>cd ./p1
+go run ./main.go
+<span class="hljs-meta">
+#</span><span class="bash"> This app runs the windows **calculator** on default.</span>
+<span class="hljs-meta">#</span><span class="bash"> So <span class="hljs-keyword">if</span> you want to run other executables just pass it using --path flag.</span>
+<span class="hljs-meta">
+#</span><span class="bash"> Example:</span>
+go run main.go --path "C:\Windows\System32\wsl.exe"
+</div></code></pre>
+<h3 id="how-it-works">How it works?</h3>
+<ul>
+<li>This program uses <code>syscall</code> built-in golang library which uses an API to execute system calls.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p1/main.go</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+<span class="hljs-comment">// ...</span>
+err = syscall.CreateProcess(
+<span class="hljs-literal">nil</span>,
+argv,
+<span class="hljs-literal">nil</span>,
+<span class="hljs-literal">nil</span>,
+<span class="hljs-literal">true</span>,
+<span class="hljs-number">0</span>,
+<span class="hljs-literal">nil</span>,
+<span class="hljs-literal">nil</span>,
+&amp;sI,
+&amp;pI)
+<span class="hljs-comment">//...</span>
+}
+
+</div></code></pre>
+<h3 id="results">Results</h3>
+<ul>
+<li>As the result, this program runs the particular application and writes <code>ThreadID</code> and <code>ProcessID</code> to the console.</li>
+</ul>
+<p><img src="p1/result_1.png" alt="img.png"></p>
+<p><img src="p1/result_2.png" alt="img.png"></p>
+<h2 id="problem-2---the-producer-consumer-problem-using-shared-memory">Problem 2 - The Producer-consumer problem using shared memory</h2>
+<p>This program solves a Producer-consumer problem using shared memory.</p>
+<h3 id="how-to-run-it">How to run it?</h3>
+<pre class="hljs"><code><div>cd ./p2
+
+go run ./main.go 
+<span class="hljs-meta">
+#</span><span class="bash"> Flags:</span>
+<span class="hljs-meta">#</span><span class="bash"> Use --cpuprofile to specify a file name to write cpu profile</span>
+<span class="hljs-meta">#</span><span class="bash"> Use --memprofile  to specify a file name to write memory profile</span>
+<span class="hljs-meta">#</span><span class="bash"> Use -n  to specify number of messages being transferred. Default is 5.</span>
+<span class="hljs-meta">#</span><span class="bash"> As default they are not being written to file</span>
+go run main.go -n 20 --cpuprofile cpu.prof --memprofile mem.prof
+
+</div></code></pre>
+<h3 id="how-it-works">How it works</h3>
+<ul>
+<li>The consumer and consume:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+<span class="hljs-keyword">type</span> Consumer <span class="hljs-keyword">struct</span> {
+msgs *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>
+}
+
+<span class="hljs-comment">// NewConsumer creates a Consumer</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewConsumer</span><span class="hljs-params">(msgs *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)</span> *<span class="hljs-title">Consumer</span></span> {
+<span class="hljs-keyword">return</span> &amp;Consumer{msgs: msgs}
+}
+
+<span class="hljs-comment">// consume reads the msgs channel</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *Consumer)</span> <span class="hljs-title">consume</span><span class="hljs-params">()</span></span> {
+fmt.Println(<span class="hljs-string">"consume: Started"</span>)
+<span class="hljs-keyword">for</span> {
+msg := &lt;-*c.msgs
+fmt.Println(<span class="hljs-string">"consume: Received:"</span>, msg)
+}
+}
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>The producer and produce:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+<span class="hljs-comment">// Producer definition</span>
+<span class="hljs-keyword">type</span> Producer <span class="hljs-keyword">struct</span> {
+msgs *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>
+done *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>
+}
+
+<span class="hljs-comment">// NewProducer creates a Producer</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewProducer</span><span class="hljs-params">(msgs *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, done *<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)</span> *<span class="hljs-title">Producer</span></span> {
+<span class="hljs-keyword">return</span> &amp;Producer{msgs: msgs, done: done}
+}
+
+<span class="hljs-comment">// produce creates and sends the message through msgs channel</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p *Producer)</span> <span class="hljs-title">produce</span><span class="hljs-params">(max <span class="hljs-keyword">int</span>)</span></span> {
+fmt.Println(<span class="hljs-string">"produce: Started"</span>)
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; max; i++ {
+fmt.Println(<span class="hljs-string">"produce: Sending "</span>, i)
+*p.msgs &lt;- i
+}
+*p.done &lt;- <span class="hljs-literal">true</span> <span class="hljs-comment">// signal when done</span>
+fmt.Println(<span class="hljs-string">"produce: Done"</span>)
+}
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>Parsing the flags:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+cpuprofile := flag.String(<span class="hljs-string">"cpuprofile"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"write cpu profile to `file`"</span>)
+memprofile := flag.String(<span class="hljs-string">"memprofile"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">"write memory profile to `file`"</span>)
+
+<span class="hljs-comment">// get the maximum number of messages from flags</span>
+max := flag.Int(<span class="hljs-string">"n"</span>, <span class="hljs-number">5</span>, <span class="hljs-string">"defines the number of messages"</span>)
+
+flag.Parse()
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>Making sure that CPU resources are not being limited by default:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// utilize the max num of cores available</span>
+runtime.GOMAXPROCS(runtime.NumCPU())
+
+<span class="hljs-comment">//...</span>
+
+</div></code></pre>
+<ul>
+<li>Running both sides:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// Start a goroutine for Produce.produce</span>
+<span class="hljs-keyword">go</span> NewProducer(&amp;msgs, &amp;done).produce(*max)
+
+<span class="hljs-comment">// Start a goroutine for Consumer.consume</span>
+<span class="hljs-keyword">go</span> NewConsumer(&amp;msgs).consume()
+
+<span class="hljs-comment">// Finish the program when the production is done</span>
+&lt;-done
+
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>Creating profiles:</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">//p2/main.go</span>
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// CPU Profile</span>
+<span class="hljs-keyword">if</span> *cpuprofile != <span class="hljs-string">""</span> {
+f, err := os.Create(*cpuprofile)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+log.Fatal(<span class="hljs-string">"could not create CPU profile: "</span>, err)
+}
+<span class="hljs-keyword">if</span> err := pprof.StartCPUProfile(f); err != <span class="hljs-literal">nil</span> {
+log.Fatal(<span class="hljs-string">"could not start CPU profile: "</span>, err)
+}
+<span class="hljs-keyword">defer</span> pprof.StopCPUProfile()
+}
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// Memory Profile</span>
+<span class="hljs-keyword">if</span> *memprofile != <span class="hljs-string">""</span> {
+f, err := os.Create(*memprofile)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+log.Fatal(<span class="hljs-string">"could not create memory profile: "</span>, err)
+}
+runtime.GC() <span class="hljs-comment">// get up-to-date statistics</span>
+<span class="hljs-keyword">if</span> err := pprof.WriteHeapProfile(f); err != <span class="hljs-literal">nil</span> {
+log.Fatal(<span class="hljs-string">"could not write memory profile: "</span>, err)
+}
+f.Close()
+}
+
+<span class="hljs-comment">//...</span>
+
+
+</div></code></pre>
+<h3 id="results">Results</h3>
+<p><img src="p2/result_1.png" alt="img.png"></p>
+<ul>
+<li>Note that the program finishes when the <strong>production</strong> is done.</li>
+</ul>
+<h2 id="problem-3---client-server-datetime-exchange-using-websockets">Problem 3 - Client-server  Datetime exchange using websockets</h2>
+<p>This implementation shows the time exchange process between 1 server and 2 clients using websockets.</p>
+<h3 id="this-program-has-3-parts">This program has 3 parts:</h3>
+<ol>
+<li>
+<p>The golang server.</p>
+</li>
+<li>
+<p>The front-end Javascript client that you can access on
+http://127.0.0.1:8080.</p>
+</li>
+<li>
+<p>The golang client.</p>
+</li>
+</ol>
+<h3 id="how-to-run-them">How to run them?</h3>
+<p>To run the server and the front-end JS client:</p>
+<pre class="hljs"><code><div>cd ./p3/server
+go get github.com/gorilla/websocket
+go run ./main.go
+<span class="hljs-meta">#</span><span class="bash"> <span class="hljs-keyword">if</span> you want to run it on other ports you can use --addr flag:</span>
+<span class="hljs-meta">#</span><span class="bash"> go run ./main.go --addr localhost:8070</span>
+</div></code></pre>
+<p>After running the server, start the client:</p>
+<pre class="hljs"><code><div>cd ./p3/client
+go get github.com/gorilla/websocket
+go run ./main.go
+<span class="hljs-meta">
+#</span><span class="bash">Note that you can<span class="hljs-string">'t start golang client before running the server. Also, after halting the server the golang client halts automatically.</span></span>
+</div></code></pre>
+<h3 id="how-they-work">How they work?</h3>
+<ul>
+<li>
+<p>The server sends its current time to the clients.</p>
+</li>
+<li>
+<p>The golang client sends its current time every second and prints all messages received.</p>
+</li>
+<li>
+<p>The JS client sends its current time when you push &quot;send&quot; button and server in response returns his own time.</p>
+</li>
+<li>
+<p>The server and golang client use <code>gorilla/websocket</code> to create websocket connections.</p>
+</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p3/server/main.go</span>
+<span class="hljs-comment">//...</span>
+<span class="hljs-keyword">var</span> upgrader = websocket.Upgrader{} <span class="hljs-comment">// use default options</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">echo</span><span class="hljs-params">(w http.ResponseWriter, r *http.Request)</span></span> {
+c, err := upgrader.Upgrade(w, r, <span class="hljs-literal">nil</span>)
+<span class="hljs-comment">//...</span>
+}
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>The server and golang client use <code>net/http</code> package to establish http connection.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p3/server/main.go</span>
+<span class="hljs-comment">//...</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+<span class="hljs-comment">//...</span>
+http.HandleFunc(<span class="hljs-string">"/echo"</span>, echo)
+http.HandleFunc(<span class="hljs-string">"/"</span>, home)
+log.Fatal(http.ListenAndServe(*addr, <span class="hljs-literal">nil</span>))
+}
+<span class="hljs-comment">//...</span>
+</div></code></pre>
+<ul>
+<li>The server uses <code>html/template</code> to render <a href="./p3/server/index.html">index.html</a> front-end Js client on
+http://127.0.0.1:8080.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p3/server/main.go</span>
+<span class="hljs-comment">//...</span>
+<span class="hljs-keyword">var</span> homeTemplate = template.Must(template.New(<span class="hljs-string">""</span>).Parse((<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
+result, err := ioutil.ReadFile(<span class="hljs-string">"index.html"</span>)
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+log.Fatal(err)
+<span class="hljs-keyword">return</span> <span class="hljs-string">""</span>
+}
+
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">string</span>(result)
+
+})()))
+</div></code></pre>
+<h3 id="results">Results</h3>
+<ul>
+<li>After running the <a href="p3/server/main.go">p3/server</a>, you can navigate to http://localhost:8080 to see this page:</li>
+</ul>
+<p><img src="p3/server/result_1.png" alt="img_1.png"></p>
+<ul>
+<li>After running the <a href="p3/server/main.go">p3/server</a>, you can observe the times sent by all clients to the server.</li>
+</ul>
+<p><img src="p3/server/result_2.png" alt="img.png"></p>
+<ul>
+<li>After running the <a href="p3/server/main.go">p3/server</a> and <a href="p3/client/main.go">p3/client</a>, you can see all the messages sent
+to this client from the server. (The current time of the server)</li>
+</ul>
+<p><img src="p3/client/result_1.png" alt="img.png"></p>
+<h2 id="problem-4---multithreading-matrix-addition">Problem 4 - Multithreading matrix addition</h2>
+<p>This program implements the functionality of adding two randomly generated <strong>N * N</strong> matrices, using concurrency.</p>
+<h3 id="one-important-point">One Important point</h3>
+<p>You should note that unlike any other programming language, Golang supports built-in functionality for multithreading
+and concurrency.</p>
+<p>This means that we can't access any API to execute system calls based on the OS, but golang gives us a much better
+functionality!</p>
+<p>Golang uses concepts like <code>Go routine</code> and <code>channel</code> which basically is equivalent to <code>coroutine</code> and <code>Pipeline</code>.</p>
+<h3 id="how-it-works">How it works?</h3>
+<ul>
+<li>At the binging 2 random N x N matrices are being generated.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p4/main.go</span>
+
+<span class="hljs-comment">//...</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+<span class="hljs-comment">//...</span>
+<span class="hljs-keyword">var</span> a [length][length]<span class="hljs-keyword">int</span>
+<span class="hljs-keyword">var</span> b [length][length]<span class="hljs-keyword">int</span>
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; length; i++ {
+<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; length; j++ {
+a[i][j] = rand.Intn(<span class="hljs-number">10</span>)
+b[i][j] = rand.Intn(<span class="hljs-number">10</span>)
+}
+}
+<span class="hljs-comment">//...</span>
+
+}
+</div></code></pre>
+<ul>
+<li>To change the dimensions of matrices you can change <code>length</code> constant inside the code (That's a compile-time constant,
+so we couldn't use flags to specify that dynamically).</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">const</span> length = &lt;any value you want&gt; <span class="hljs-comment">//default is 1000</span>
+
+</div></code></pre>
+<ul>
+<li>In this program we use a particular number of producers (That number is interchangeable) which write on a channel with
+the length 10. (We didn't use longer channel because the overhead of creating such channel consumes much more time,
+and it's not efficient to do so. Because the consumer is much faster than producers and 10 is enough to guaranty that
+producers are not going to stand in a queue for too long.)</li>
+<li>In addition to that, one consumer reads the results from the channel. (One is enough because we need to sync the
+results and reading data from channel consumes much less time than calculating the sum)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment">// p4/main.go</span>
+
+<span class="hljs-comment">//...</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+<span class="hljs-comment">// ...</span>
+
+<span class="hljs-comment">// </span>
+pairs := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> pair, <span class="hljs-number">10</span>)
+
+<span class="hljs-keyword">var</span> wg sync.WaitGroup
+
+<span class="hljs-comment">//...</span>
+
+<span class="hljs-comment">// Used to sync the final results</span>
+wg.Add(getThreadLength())
+
+<span class="hljs-comment">// Run producers to calculate sum of each pair</span>
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; getThreadLength(); i++ {
+<span class="hljs-keyword">go</span> Calc(pairs, &amp;a, &amp;b, &amp;rez, &amp;wg)
+}
+
+
+<span class="hljs-comment">// To track the time, timer starts:</span>
+start = time.Now()
+
+<span class="hljs-comment">// Running the one and only receiver or consumer</span>
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; length; i++ {
+<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; length; j++ {
+pairs &lt;- pair{row: i, col: j}
+}
+}
+<span class="hljs-built_in">close</span>(pairs)
+<span class="hljs-comment">// Used to sync the final results</span>
+wg.Wait()
+
+<span class="hljs-comment">// To track the time, timer ends:</span>
+elapsed := time.Since(start)
+
+<span class="hljs-comment">// Printing the Timer result:</span>
+fmt.Println(<span class="hljs-string">"Binomial took "</span>, elapsed)
+
+}
+
+
+</div></code></pre>
+<ul>
+<li>
+<p>As default the program uses 1 goroutine as calculator or producer, Which means it runs in single thread mode.</p>
+</li>
+<li>
+<p>To run the program using all threads the number of go routines must be more than kernel threads. You can
+use <code>--thread-len</code> flag to specify the number of <code>goroutines</code>
+being used. (see more in How to run section.)</p>
+</li>
+<li>
+<p>This command guarantees that the max-number of kernel threads being used is set to the maximum number available, to
+prevent OS from limiting the resources:</p>
+</li>
+</ul>
+<pre class="hljs"><code><div>    runtime.GOMAXPROCS(runtime.NumCPU())
+</div></code></pre>
+<h3 id="how-to-run-it">How to run it?</h3>
+<p>Follow these steps:</p>
+<pre class="hljs"><code><div>cd ./p4
+<span class="hljs-meta">
+#</span><span class="bash"> Run <span class="hljs-keyword">in</span> single thread mode:</span>
+go run ./main.go 
+<span class="hljs-meta">
+#</span><span class="bash"> To <span class="hljs-built_in">set</span> the number of goroutines (producers) use --thread-len. Default is 1 (Single thread).</span>
+go run ./main.go --thread-len 10
+</div></code></pre>
+<h3 id="result">Result</h3>
+<p>After running the program, you can see the time it took to compute the final matrix.</p>
+<ul>
+<li>I didn't print the result matrix because there was no point in printing a random matrix.</li>
+</ul>
+<p><img src="p4/result.png" alt="img.png"></p>
+<blockquote>
+<ul>
+<li>As you can see, increasing the number of goroutines does not always provide better results. For example when we used 1000 goroutines, the overhead of handling the concurrency was more expensive than the improvement we got.</li>
+</ul>
+</blockquote>
+
+</body>
+</html>

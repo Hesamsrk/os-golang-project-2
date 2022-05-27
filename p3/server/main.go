@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/gorilla/websocket"
 	"html/template"
 	"io/ioutil"
@@ -45,7 +46,11 @@ func main() {
 	log.SetFlags(0)
 	http.HandleFunc("/echo", echo)
 	http.HandleFunc("/", home)
-	log.Fatal(http.ListenAndServe(*addr, nil))
+	fmt.Printf("server running on: %v", *addr)
+	err := http.ListenAndServe(*addr, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 var homeTemplate = template.Must(template.New("").Parse((func() string {
