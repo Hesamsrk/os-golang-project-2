@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var address = flag.String("addr", "localhost:8080", "http service address")
+var addr = flag.String("addr", "localhost:8080", "http service address")
 
 func main() {
 	flag.Parse()
@@ -19,7 +19,7 @@ func main() {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	u := url.URL{Scheme: "ws", Host: *address, Path: "/echo"}
+	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
 	log.Printf("connecting to %s", u.String())
 
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
@@ -50,7 +50,7 @@ func main() {
 		case <-done:
 			return
 		case t := <-ticker.C:
-			err := c.WriteMessage(websocket.TextMessage, []byte(t.String() + " - I am a golang client!"))
+			err := c.WriteMessage(websocket.TextMessage, []byte(t.String()+" - I am a golang client!"))
 			if err != nil {
 				log.Println("write:", err)
 				return
